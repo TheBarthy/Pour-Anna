@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pour Nana ✨</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Arrière-plan étoilé fixe -->
+  <div id="stars-background"></div>
+
+  <!-- ÉTAPE 1 : PROLOGUE CINÉMATIQUE -->
+  <div id="intro-overlay" class="intro-overlay active">
+    <div class="cinematic-text-container">
+      <p id="cinematic-p1" class="cinematic-paragraph"></p>
+      <p id="cinematic-p2" class="cinematic-paragraph"></p>
+      <button id="btn-reveal-sky" class="cinematic-btn hidden-btn">
+        Explorer le ciel ✨
+      </button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 1.5 : CIEL INTERACTIF EN 4 PANS -->
+  <div id="interactive-sky" class="sky-container hidden">
+    
+    <div id="sky-world" class="sky-world pos-center">
+      
+      <!-- PAN CENTRE -->
+      <div id="pan-center" class="sky-pan">
+        <div class="stars-layer" id="stars-center"></div>
+      </div>
+
+      <!-- PAN GAUCHE -->
+      <div id="pan-left" class="sky-pan">
+        <div class="stars-layer" id="stars-left"></div>
+      </div>
+
+      <!-- PAN DROITE -->
+      <div id="pan-right" class="sky-pan">
+        <div class="stars-layer" id="stars-right"></div>
+      </div>
+
+      <!-- PAN BAS -->
+      <div id="pan-bottom" class="sky-pan">
+        <div class="bottom-quote-header">
+          <p class="deep-quote">"Parfois, il faut oser regarder dans l'ombre pour réaliser toute la lumière qu'on porte en soi..."</p>
+        </div>
+        <div class="stars-layer" id="stars-bottom"></div>
+      </div>
+
+    </div>
+
+    <!-- Interface de Navigation -->
+    <nav id="sky-nav" class="sky-nav">
+      <button id="nav-left" class="nav-arrow nav-left hidden-arrow">
+        <span class="arrow-icon" id="nav-left-icon">‹</span>
+        <span class="arrow-label" id="nav-left-text">À l'ouest</span>
+      </button>
+
+      <button id="nav-right" class="nav-arrow nav-right">
+        <span class="arrow-label" id="nav-right-text">À l'est</span>
+        <span class="arrow-icon" id="nav-right-icon">›</span>
+      </button>
+
+      <button id="nav-bottom" class="nav-arrow nav-bottom">
+        <span class="arrow-label">Prendre du recul</span>
+        <span class="arrow-icon">⌄</span>
+      </button>
+
+      <button id="nav-top" class="nav-arrow nav-top hidden-arrow">
+        <span class="arrow-icon">⌃</span>
+        <span class="arrow-label">Au centre</span>
+      </button>
+    </nav>
+
+    <!-- La Lune -->
+    <div id="moon" class="moon-container" title="Poursuivre le voyage">
+      <div class="moon-shape"></div>
+      <span class="moon-hint">Voyager dans le temps 🚀</span>
+    </div>
+
+    <!-- Modal pour afficher la révélation d'une étoile -->
+    <div id="star-modal" class="star-modal hidden">
+      <div class="star-modal-content">
+        <span id="close-modal" class="close-modal">&times;</span>
+        <div class="modal-star-icon">✦</div>
+        <p id="star-modal-text" class="modal-text"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TEXTE D'ASTROPHYSIQUE ET TRANSITION FUSÉE -->
+  <div id="rocket-overlay" class="rocket-overlay hidden">
+    <div class="cinematic-text-container">
+      <p id="astro-text" class="astro-text"></p>
+      <button id="btn-launch-rocket" class="cinematic-btn hidden-btn">
+        Remontons à l'origine de l'une des plus belles histoires de ma vie ✨
+      </button>
+    </div>
+    
+    <!-- Fusée animée -->
+    <div id="space-rocket" class="space-rocket hidden-rocket">
+      <div class="rocket-emoji">🚀</div>
+      <div class="rocket-flame"></div>
+    </div>
+  </div>
+
+  <!-- BIG BANG : TRANSITION VERS LE VOYAGE SPATIAL -->
+  <div id="bigbang-overlay" class="bigbang-overlay hidden">
+    <div class="bigbang-core"></div>
+    <div class="bigbang-shockwave"></div>
+    <div id="bigbang-particles" class="bigbang-particles"></div>
+  </div>
+
+  <!-- VOYAGE À TRAVERS L'ESPACE ET LE TEMPS -->
+  <div id="space-journey" class="space-journey hidden">
+
+    <!-- SCÈNE 1 -->
+    <div class="journey-scene active" id="scene-1">
+      <svg class="journey-path-svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+        <path id="path-1" class="journey-path" d="M 60,70 C 220,180 120,340 330,300 C 520,270 480,120 700,180 C 860,225 780,420 920,480" />
+      </svg>
+      <div class="celestial-object" style="top:12%; left:55%;">🪐</div>
+      <div class="celestial-object" style="top:58%; left:14%;">🌠</div>
+      <div class="celestial-object" style="top:36%; left:80%;">🌟</div>
+      <div class="celestial-object" style="top:74%; left:46%;">☄️</div>
+      <div class="celestial-object small" style="top:20%; left:30%;">✨</div>
+      <div class="journey-rocket" id="rocket-1">🚀</div>
+      <div class="wormhole" id="wormhole-1" style="top:80%; left:92%;">
+        <div class="wormhole-ring r1"></div>
+        <div class="wormhole-ring r2"></div>
+        <div class="wormhole-ring r3"></div>
+      </div>
+    </div>
+
+    <!-- SCÈNE 2 -->
+    <div class="journey-scene" id="scene-2">
+      <svg class="journey-path-svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+        <path id="path-2" class="journey-path" d="M 60,80 C 260,60 200,260 400,240 C 600,220 620,80 800,150 C 900,190 850,380 930,470" />
+      </svg>
+      <div class="celestial-object" style="top:14%; left:62%;">🌌</div>
+      <div class="celestial-object" style="top:52%; left:20%;">🌑</div>
+      <div class="celestial-object" style="top:30%; left:82%;">🌀</div>
+      <div class="celestial-object" style="top:70%; left:50%;">⭐</div>
+      <div class="celestial-object small" style="top:22%; left:38%;">✨</div>
+      <div class="journey-rocket" id="rocket-2">🚀</div>
+      <div class="wormhole" id="wormhole-2" style="top:78%; left:93%;">
+        <div class="wormhole-ring r1"></div>
+        <div class="wormhole-ring r2"></div>
+        <div class="wormhole-ring r3"></div>
+      </div>
+    </div>
+
+    <!-- SCÈNE 3 : APPROCHE DE LA TERRE -->
+    <div class="journey-scene" id="scene-3">
+      <svg class="journey-path-svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+        <path id="path-3" class="journey-path" d="M 60,80 C 250,50 300,220 480,200 C 620,185 650,80 800,140 C 900,180 820,380 700,450" />
+      </svg>
+      <div class="celestial-object sun-icon" style="top:23%; left:68%;">☀️</div>
+      <div class="celestial-object small" style="top:40%; left:30%;">🛰️</div>
+      <div class="celestial-object small" style="top:62%; left:85%;">🛰️</div>
+      <div class="celestial-object" style="top:58%; left:52%;">🌕</div>
+      <div class="celestial-object earth-icon" style="top:75%; left:70%;">🌍</div>
+      <div class="journey-rocket" id="rocket-3">🚀</div>
+    </div>
+
+    <!-- TEXTE AFFICHÉ DANS LE TROU DE VER -->
+    <div id="wormhole-text-overlay" class="wormhole-text-overlay hidden">
+      <p id="wormhole-text" class="wormhole-text"></p>
+      <button id="wormhole-continue-btn" class="cinematic-btn visible">Continuer le voyage 🚀</button>
+    </div>
+
+    <!-- TEXTE AU PASSAGE PRÈS DU SOLEIL -->
+    <div id="sun-text-overlay" class="sun-text-overlay hidden">
+      <p id="sun-text" class="sun-text"></p>
+    </div>
+
+  </div>
+
+ 
+<!-- MODAL LIVRE DE SOUVENIRS -->
+<div id="book-modal" class="book-modal hidden">
+  <div class="book-container">
+    <!-- Couverture / En-tête -->
+    <button id="book-close-btn" class="book-close-btn">&times;</button>
+    <div class="book-cover-header">
+      <h2 id="book-title">Titre du livre</h2>
+      <div class="book-decor-line"></div>
+    </div>
+
+    <!-- Contenu de la page courante avec effet de feuille -->
+    <div class="book-page-wrapper">
+      <div id="book-page-content" class="book-page-content">
+        <!-- Le contenu texte injecté par JS -->
+      </div>
+    </div>
+
+    <!-- Navigation & Indicateur de page en bas -->
+    <div class="book-footer">
+      <button id="book-prev-btn" class="book-nav-btn" aria-label="Page précédente">
+        &#10094;
+      </button>
+      <span id="book-page-indicator" class="book-page-indicator">Page 1 / 3</span>
+      <button id="book-next-btn" class="book-nav-btn" aria-label="Page suivante">
+        &#10095;
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLAY DE FIN D'ANNIVERSAIRE -->
+<div id="birthday-overlay" class="birthday-overlay hidden">
+  <canvas id="fireworks-canvas"></canvas>
+  <div class="birthday-card">
+    <h1 class="birthday-title">Bon anniversaire Anna !</h1>
+    <p class="birthday-message">
+      Je te souhaite que du bonheur dans le futur, n'oublie jamais que tu es une personne exceptionnelle, et que c'est une vraie aubaine de t'avoir dans ma vie. Puisses-tu vivre dans un bonheur immense à tout jamais ! Je t'aime profondément ❤️
+    </p>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
