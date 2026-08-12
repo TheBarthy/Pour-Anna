@@ -734,7 +734,7 @@ await openBookModal(
   
     await showSunText(
       "En passant si près du Soleil, une évidence me traverse : aussi ardent et lumineux soit-il, il ne t'arrivera jamais à la cheville, Nana. Ta chaleur et ta lumière à toi n'ont pas d'égal.",
-      4500
+      10000
     );
     
     await flyAlongPathSegment(path3, rocket3, sunT, 1, 5000);
