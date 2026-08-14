@@ -633,10 +633,10 @@ function openBookModal(title, pagesArray, isLastBook = false) {
 
       setTimeout(() => {
         modal.classList.add("hidden");
-        // Si c'est le dernier livre, on lance les feux d'artifice !
+        // Si c'est le dernier livre, on lance la scène cinématique finale !
         if (isLastBook) {
-          triggerBirthdayEnd();
-        }
+          triggerFinalCinematicScene();
+}
         resolve();
       }, 500);
     }
@@ -790,94 +790,183 @@ await openBookModal(
 );
   }
 
-  // --- GESTION DU MESSAGE DE FIN ET DES FEUX D'ARTIFICE ---
+// ==========================================
+// SCÈNE FINALE : CIEL ÉTOILÉ -> COUCHER DE SOLEIL
+// ==========================================
 
-function triggerBirthdayEnd() {
-  const overlay = document.getElementById("birthday-overlay");
-  overlay.classList.remove("hidden");
+function triggerFinalCinematicScene() {
+  const overlay = document.getElementById('final-scene-overlay');
+  const world = document.getElementById('final-world');
+  const btnDescend = document.getElementById('btn-descend-scene');
   
-  // Petite pause pour activer le fondu CSS
-  setTimeout(() => {
-    overlay.classList.add("visible");
-    startFireworks();
-  }, 50);
+  if (!overlay) return;
+  
+  overlay.classList.remove('hidden');
+  initFinalSkyCanvas();
+
+  const tempText = "Nous voilà au terme de ce voyage. Merci infiniment d'avoir accepté de retraverser cette aventure avec moi... Je sais combien elle a pu remuer de choses en toi.\n\nMais il est peut-être temps de trouver le calme, et pour ça rien de mieux qu'un petit coucher de soleil.\n\nJ'ai toujours aimé les couchers de soleil, alors laisse moi te partager celui-ci.\n\nEnfin, trêve de blabla, il est temps de remettre les pieds sur Terre, et d'aller de l'avant.";
+
+  typewriterFinalText(tempText, () => {
+    if (btnDescend) {
+      btnDescend.classList.remove('hidden', 'hidden-btn');
+      btnDescend.classList.add('visible', 'visible-btn');
+    }
+  });
+
+  // Action lors du clic sur "CONTINUER LE VOYAGE"
+  if (btnDescend) {
+    btnDescend.onclick = () => {
+      btnDescend.classList.add('hidden-btn');
+
+      // 1. Descente douce de la caméra vers le paysage coucher de soleil
+      world.style.transform = 'translateY(-100vh)';
+
+      // 2. Générer les lucioles dorées dans le coucher de soleil
+      createSunsetFireflies();
+
+      // 3. Faire apparaître la carte finale romantique après la descente
+      setTimeout(() => {
+        const finalCard = document.getElementById('sunset-final-card');
+        if (finalCard) {
+          finalCard.classList.remove('hidden-card');
+          finalCard.classList.add('visible-card');
+        }
+      }, 2000);
+    };
+  }
 }
 
-function startFireworks() {
-  const canvas = document.getElementById("fireworks-canvas");
-  const ctx = canvas.getContext("2d");
+// Effet de frappe caractère par caractère pour le texte nocturne
+function typewriterFinalText(text, onComplete) {
+  const container = document.getElementById('final-typewriter-text');
+  if (!container) return;
   
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
-
-  let particles = [];
-  const colors = ["#ffd700", "#ff69b4", "#00ffff", "#ff4500", "#ffffff", "#7b68ee"];
-
-  class Particle {
-    constructor(x, y, color) {
-      this.x = x;
-      this.y = y;
-      this.color = color;
-      const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 5 + 1;
-      this.vx = Math.cos(angle) * speed;
-      this.vy = Math.sin(angle) * speed;
-      this.alpha = 1;
-      this.decay = Math.random() * 0.015 + 0.005;
-      this.radius = Math.random() * 2.5 + 1;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.vy += 0.04; // gravité
-      this.alpha -= this.decay;
-    }
-    draw() {
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, this.alpha);
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  function createExplosion() {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * (canvas.height * 0.6);
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    for (let i = 0; i < 60; i++) {
-      particles.push(new Particle(x, y, color));
-    }
-  }
-
-  // Lancer un feu d'artifice à intervalles réguliers
-  const fireworkInterval = setInterval(() => {
-    createExplosion();
-  }, 700);
+  container.textContent = "";
+  container.classList.add('typing-cursor');
+  let index = 0;
   
-  // Premier tir immédiatement
-  createExplosion();
+  const timer = setInterval(() => {
+    if (index < text.length) {
+      container.textContent += text.charAt(index);
+      index++;
+    } else {
+      clearInterval(timer);
+      container.classList.remove('typing-cursor');
+      if (onComplete) onComplete();
+    }
+  }, 40);
+}
+
+// Animation du canvas étoilé de la première partie
+function initFinalSkyCanvas() {
+  const canvas = document.getElementById('final-stars-canvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const stars = [];
+  const colors = ['#ffffff', '#ffe9c4', '#d4fbff'];
+  
+  for (let i = 0; i < 220; i++) {
+    stars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.3 + 0.3,
+      alpha: Math.random(),
+      maxAlpha: 0.3 + Math.random() * 0.7,
+      speed: 0.005 + Math.random() * 0.015,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+
+  const shootingStars = [];
+
+  function createShootingStar() {
+    shootingStars.push({
+      x: Math.random() * (width * 0.9),
+      y: Math.random() * (height * 0.4),
+      length: 140 + Math.random() * 90,
+      speed: 4 + Math.random() * 3,
+      angle: Math.PI / 4,
+      alpha: 1
+    });
+  }
+
+  setInterval(() => {
+    if (Math.random() > 0.2) {
+      createShootingStar();
+    }
+  }, 1200);
 
   function animate() {
-    ctx.fillStyle = "rgba(5, 5, 15, 0.2)"; // Traîne lumineuse
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, width, height);
 
-    particles.forEach((p, index) => {
-      p.update();
-      p.draw();
-      if (p.alpha <= 0) particles.splice(index, 1);
+    stars.forEach(s => {
+      s.alpha += s.speed;
+      if (s.alpha > s.maxAlpha || s.alpha < 0.1) s.speed = -s.speed;
+      ctx.fillStyle = s.color;
+      ctx.globalAlpha = Math.max(0, s.alpha);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fill();
     });
+
+    ctx.globalAlpha = 1;
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const st = shootingStars[i];
+      const endX = st.x - st.length * Math.cos(st.angle);
+      const endY = st.y - st.length * Math.sin(st.angle);
+
+      const gradient = ctx.createLinearGradient(st.x, st.y, endX, endY);
+      gradient.addColorStop(0, `rgba(255, 255, 255, ${st.alpha})`);
+      gradient.addColorStop(0.3, `rgba(246, 207, 135, ${st.alpha * 0.8})`);
+      gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(st.x, st.y);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
+
+      st.x += st.speed * Math.cos(st.angle);
+      st.y += st.speed * Math.sin(st.angle);
+      st.alpha -= 0.006;
+
+      if (st.alpha <= 0 || st.x > width || st.y > height) {
+        shootingStars.splice(i, 1);
+      }
+    }
 
     requestAnimationFrame(animate);
   }
-  
+
   animate();
 }
 
+// Génération dynamique de lucioles lumineuses pour la scène du Coucher de Soleil
+function createSunsetFireflies() {
+  const container = document.getElementById("sunset-fireflies");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const fireflyCount = 25;
+  for (let i = 0; i < fireflyCount; i++) {
+    const ff = document.createElement("div");
+    ff.classList.add("sunset-firefly");
+    ff.style.left = `${Math.random() * 100}%`;
+    ff.style.top = `${40 + Math.random() * 50}%`;
+    ff.style.animationDelay = `${Math.random() * 4}s`;
+    ff.style.animationDuration = `${3 + Math.random() * 4}s`;
+    container.appendChild(ff);
+  }
+}
 });

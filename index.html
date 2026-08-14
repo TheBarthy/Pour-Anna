@@ -214,17 +214,83 @@
   </div>
 </div>
 
-<!-- OVERLAY DE FIN D'ANNIVERSAIRE -->
-<div id="birthday-overlay" class="birthday-overlay hidden">
-  <canvas id="fireworks-canvas"></canvas>
-  <div class="birthday-card">
-    <h1 class="birthday-title">Bon anniversaire Anna !</h1>
-    <p class="birthday-message">
-      Je te souhaite que du bonheur dans le futur, n'oublie jamais que tu es une personne exceptionnelle, et que c'est une vraie aubaine de t'avoir dans ma vie. Puisses-tu vivre dans un bonheur immense à tout jamais ! Je t'aime profondément ❤️
-    </p>
+<!-- SCÈNE CINÉMATIQUE FINALE -->
+  <div id="final-scene-overlay" class="final-scene-overlay hidden">
+    <!-- Fond & Décor global -->
+    <div id="final-world" class="final-world">
+      
+      <!-- ÉTAPE 1 : Ciel nocturne + Étoiles filantes + Texte cinématique -->
+      <section class="final-sky-section">
+        <canvas id="final-stars-canvas"></canvas>
+
+    <div class="cinematic-text-container">
+      <p id="final-typewriter-text" class="cinematic-paragraph"></p>
+      <button id="btn-descend-scene" class="cinematic-btn hidden-btn">
+        FINALISER LE VOYAGE ✨
+      </button>
+    </div>
+      </section>
+
+<!-- ÉTAPE 2 : Paysage Coucher de Soleil Interactif -->
+<section class="final-landscape-section" id="final-sunset-section">
+  <!-- Ciel dégradé avec Soleil au couchant -->
+  <div class="sunset-sky">
+    <div class="sunset-sun"></div>
+    <div class="sunset-clouds"></div>
+    <!-- Volée d'oiseaux animée -->
+    <div class="birds-container">
+      <span class="bird b1">v</span>
+      <span class="bird b2">v</span>
+      <span class="bird b3">v</span>
+    </div>
+  </div>
+
+  <!-- Mer / Eau avec reflet brillant du soleil -->
+  <div class="sunset-ocean">
+    <div class="sun-reflection"></div>
+    <div class="water-waves"></div>
+  </div>
+
+  <!-- Silhouettes du décor au premier plan -->
+  <!-- Silhouette Arbre à Gauche -->
+  <div class="landscape-tree">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMin meet">
+      <path fill="#12061c" d="M48,100 L52,100 L51,60 C55,55 65,50 75,48 L73,44 C63,47 53,51 50,55 L49,45 C58,38 70,30 78,25 L75,21 C68,26 56,33 48,40 L48,30 C53,22 62,15 70,10 L66,7 C58,12 49,20 47,27 L47,0 L43,0 L43,27 C41,20 32,12 24,7 L20,10 C28,15 37,22 42,30 L42,40 C34,33 22,26 15,21 L12,25 C20,30 32,38 41,45 L40,55 C37,51 27,47 17,44 L15,48 C25,50 35,55 39,60 Z"/>
+      <circle cx="50" cy="15" r="18" fill="#12061c"/>
+      <circle cx="35" cy="25" r="14" fill="#12061c"/>
+      <circle cx="65" cy="25" r="14" fill="#12061c"/>
+      <circle cx="25" cy="38" r="12" fill="#12061c"/>
+      <circle cx="75" cy="38" r="12" fill="#12061c"/>
+      <circle cx="20" cy="50" r="9" fill="#12061c"/>
+      <circle cx="80" cy="50" r="9" fill="#12061c"/>
+    </svg>
+  </div>
+
+<!-- Silhouette Cheval -->
+<div class="landscape-horse">
+  <img src="cheval.png" alt="Silhouette de cheval" />
+</div>
+
+  <!-- Sol / Colline -->
+  <div class="landscape-ground"></div>
+
+  <!-- Conteneur pour les lucioles animées au coucher du soleil -->
+  <div id="sunset-fireflies"></div>
+
+  <!-- Message Final Poétique (S'affiche après la descente) -->
+<div id="sunset-final-card" class="sunset-card hidden-card">
+  <h2>Pour toi, Anna 🫶</h2>
+  <div class="card-body">
+    <p>Le voyage à travers les étoiles touche à sa fin, et le ciel s'est teint de cet orangé que j'aime tant...</p>
+    <p>À chaque fois que je regarde un coucher de soleil, c'est ton visage qui m'apparaît : tes cheveux roux aux reflets dorés, la lumière dans tes yeux bleu-vert, et toute la chaleur de ton âme, mais c'est surtout l'envie de t'avoir à mes côtés qui l'emporte. Néanmoins, qu'importe l'endroit, qu'importe le moment, t'avoir à mes côtés suffit à le rendre merveilleux.</p>
+    <p>On a traversé des tempêtes, essuyé des doutes et bravé la distance. Mais si ce long chemin m'a appris une chose, c'est que rien n'a pu altérer la beauté de ce qu'on partage. Et si on s'offrait enfin le départ qu'on n'a jamais pu avoir ?</p>
+    <p>Si j'ai mis tant de cœur à bâtir ce monde, c'est parce que les mots ordinaires me semblaient trop petits pour exprimer tout ce que tu représentes pour moi.</p>
+    <p>Ce coucher de soleil, c'est la fin du passé tumultueux et le tout premier jour d'un avenir apaisé. Tu n'as pas besoin d'être forte en permanence ni d'être parfaite : je suis là, tel que je suis, prêt à tenir ta main tout au long du chemin.</p>
+    <p class="signature">Je t'aime. ❤️</p>
   </div>
 </div>
-  
+</section>
+
   <script src="script.js"></script>
 </body>
 </html>
